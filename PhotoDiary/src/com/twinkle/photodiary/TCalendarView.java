@@ -21,17 +21,24 @@ public class TCalendarView extends View {
     }
 
 	protected void onDraw(Canvas canvas){
-	
 		int nW = canvas.getWidth() / 7;
 		float fH = (float)canvas.getHeight() - 50.0f;
 		
-		p.setColor(Color.BLUE);
+		p.setColor(Color.argb(255, 0x30, 0x30 , 0x30));
+		
 		float fx = 2.0f;
 		for(int i = 0 ; i < 8 ; i++)
 		{
 			canvas.drawLine(fx , 50.0f , fx, fH, p);
 			fx += (float)nW;
 		}
+		float fx2 = canvas.getWidth();
+		for(float h = 50.0f ; h <= fH ; h += 80.0f)
+		{
+			canvas.drawLine(2.0f , h , fx2, h, p);
+		}
+		
+		canvas.drawText("1", 20, 20, p);
 	}
 	
 }
