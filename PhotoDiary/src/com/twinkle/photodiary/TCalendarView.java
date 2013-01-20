@@ -1,5 +1,8 @@
 package com.twinkle.photodiary;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,15 +12,24 @@ import android.view.View;
 
 public class TCalendarView extends View {
 
+	private Calendar mSelectDay;
+	private GregorianCalendar mGCal;
+	
 	public Paint p;//= new Paint();
 	public TCalendarView(Context context){
 		super(context);
 		p = new Paint();
+		
+		mSelectDay 	= Calendar.getInstance();
+		mGCal 		= new GregorianCalendar();
+		
 	}
 	
 	public TCalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
         p = new Paint();
+        mSelectDay 	= Calendar.getInstance();
+		mGCal 		= new GregorianCalendar();
     }
 
 	protected void onDraw(Canvas canvas){
@@ -25,7 +37,13 @@ public class TCalendarView extends View {
 		float fH = (float)canvas.getHeight() - 50.0f;
 		
 		p.setColor(Color.argb(255, 0x30, 0x30 , 0x30));
+		float fSize = p.getTextSize();
+		p.setTextSize(fSize * 2.0f); 
+		int iMonth = mSelectDay.get(Calendar.MONTH) + 1;
 		
+		String s = mSelectDay.get(Calendar.YEAR) + "³â" + iMonth + "¿ù" + mSelectDay.get(Calendar.DAY_OF_MONTH) + "ÀÏ";
+		canvas.drawText(s, 20, 20, p);
+	
 		float fx = 2.0f;
 		for(int i = 0 ; i < 8 ; i++)
 		{
@@ -37,8 +55,6 @@ public class TCalendarView extends View {
 		{
 			canvas.drawLine(2.0f , h , fx2, h, p);
 		}
-		
-		canvas.drawText("1", 20, 20, p);
 	}
-	
 }
+
